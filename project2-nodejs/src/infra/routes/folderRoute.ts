@@ -1,8 +1,10 @@
 import express, { Request, Response } from "express";
 
+import {create} from '../../controller/folder';
+
 const folderRoute = (app: express.Application) => {
   app.post("/folders", async (req: Request, res: Response) => {
-    res.send("create folder");
+    await create(req, res)
   });
 };
 
