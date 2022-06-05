@@ -1,8 +1,11 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response } from "express";
+
+import { create } from "../../controller/file";
+
 
 const fileRoute = (app: express.Application) => {
-  app.post('/files', (req:Request, res:Response) => {
-    res.send(req.body);
+  app.post("/files", async (req: Request, res: Response) => {
+    await create(req, res);
   });
 };
 
