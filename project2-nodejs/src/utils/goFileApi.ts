@@ -1,5 +1,10 @@
 import axios from "axios";
 
+const getServer = async()=>{
+const server = await axios.get("https://api.gofile.io/getServer");
+return server.data.data;
+}
+
 export const createFolder = async (name: string) => {
   const data = {
     parentFolderId: process.env.PARENT_FOLDER_ID,
@@ -25,8 +30,12 @@ export const uploadFile = async (file: any, folderId: string) => {
       redirect: "follow",
     };
 
+    const serverResponse = await getServer();
+
+    const uploadUrl = `https://${serverResponse.server}.gofile.io/uploadFile`;
+
     const uploadResponse = await fetch(
-      "https://store1.gofile.io/uploadFile",
+      uploadUrl,
       requestOptions
     );
 
